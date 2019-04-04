@@ -1,14 +1,14 @@
 [ {
+  "schema" : "${file(config/models/ErrorResponse.json)}",
+  "name" : "ErrorResponse",
+  "contentType" : "application/json"
+}, {
   "schema" : "${file(config/models/UserData.json)}",
   "name" : "UserData",
   "contentType" : "application/json"
 }, {
   "schema" : "${file(config/models/UserDataItem.json)}",
   "name" : "UserDataItem",
-  "contentType" : "application/json"
-}, {
-  "schema" : "${file(config/models/ErrorResponse.json)}",
-  "name" : "ErrorResponse",
   "contentType" : "application/json"
 }, {
   "schema" : "${file(config/models/Users.json)}",
