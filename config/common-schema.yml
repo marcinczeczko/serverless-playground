@@ -1,0 +1,20 @@
+MethodResponse400Json:
+  statusCode: 400
+  responseModels:
+    "application/json": ErrorResponse
+MethodResponse409Json:
+  statusCode: 409
+  responseModels:
+    "application/json": ErrorResponse
+MethodResponse415Json:
+  statusCode: 415
+  responseModels:
+    "application/json": ErrorResponse
+MethodResponse404Json:
+  statusCode: 404
+  responseModels:
+    "application/json": ErrorResponse
+MethodResponse500Json:
+  statusCode: 500
+  responseModels:
+    "application/json": ErrorResponse

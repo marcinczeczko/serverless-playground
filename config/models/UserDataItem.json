@@ -1,0 +1,54 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "title" : "User Data Item",
+  "type" : "object",
+  "additionalProperties" : false,
+  "description" : "Object represeting a single data item for single user. It consists a collection of data for that item",
+  "properties" : {
+    "userId" : {
+      "type" : "string",
+      "description" : "User Identifier"
+    },
+    "itemId" : {
+      "type" : "string",
+      "description" : "Data Item Identifier"
+    },
+    "itemName" : {
+      "type" : "string",
+      "description" : "Data Item Name"
+    },
+    "collection" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/CollectionItem"
+      },
+      "description" : "Collection of data"
+    }
+  },
+  "required" : [ "userId", "itemId", "itemName" ],
+  "definitions" : {
+    "CollectionItem" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Id of collection item"
+        },
+        "headline" : {
+          "type" : "string",
+          "description" : "Data headline"
+        },
+        "subheadline" : {
+          "type" : "string",
+          "description" : "Data subheadline"
+        },
+        "visible" : {
+          "type" : "boolean",
+          "description" : "Flag if that item is marked as visible or not"
+        }
+      },
+      "required" : [ "visible" ]
+    }
+  }
+}

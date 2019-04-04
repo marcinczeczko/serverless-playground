@@ -1,0 +1,40 @@
+##### ADD NEW DATA (for user 1)
+POST https://{{apiid}}.execute-api.eu-central-1.amazonaws.com/dev/users/1
+Content-Type: application/json
+
+< ./UserData1.json
+
+##### ADD NEW DATA (for user 1)
+POST https://{{apiid}}.execute-api.eu-central-1.amazonaws.com/dev/users/1
+Content-Type: application/json
+
+< ./UserData1.1.json
+
+##### ADD NEW DATA (for user 2)
+POST https://{{apiid}}.execute-api.eu-central-1.amazonaws.com/dev/users/2
+Content-Type: application/json
+
+< ./UserData2.json
+
+##### GET USER SUMMARY DATA (for user 1)
+GET https://{{apiid}}.execute-api.eu-central-1.amazonaws.com/dev/users/1
+Accept: application/json
+
+##### GET USER SUMMARY DATA (for user 2)
+GET https://{{apiid}}.execute-api.eu-central-1.amazonaws.com/dev/users/2
+Accept: application/json
+
+
+##### GET USER DATA ITEM (for user 2, item 1)
+GET https://{{apiid}}.execute-api.eu-central-1.amazonaws.com/dev/users/2/1
+Accept: application/json
+
+###### UPDATE USER DATA ITEM (for user 2, item 1)
+PUT https://{{apiid}}.execute-api.eu-central-1.amazonaws.com/dev/users/2/1
+Content-Type: application/json
+
+< ./User2NewCollection.json
+
+##### SHOW ALL USERS
+GET https://{{apiid}}.execute-api.eu-central-1.amazonaws.com/dev/users
+Accept-Type: application/json

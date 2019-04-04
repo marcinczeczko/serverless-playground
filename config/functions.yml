@@ -1,0 +1,103 @@
+getUsers:
+  handler: com.serverless.handler.GetUsersHandler
+  events:
+    - http:
+        method: get
+        path: users
+        documentation:
+          summary: "Get all users"
+          description: "Get a list of all users"
+          methodResponses:
+            - statusCode: '200'
+              responseModels:
+                "application/json": Users
+            - ${self:custom.commonModelSchemaFragments.MethodResponse500Json}
+getUserData:
+  handler: com.serverless.handler.GetUserDataHandler
+  events:
+    - http:
+        method: get
+        path: users/{userId}
+        documentation:
+          summary: "Get user data"
+          description: "Get a user data with list of data items (just Ids)"
+          pathParams:
+            - name: "userId"
+              description: "ID of the user"
+          methodResponses:
+            - statusCode: '200'
+              responseModels:
+                "application/json": UserData
+            - ${self:custom.commonModelSchemaFragments.MethodResponse404Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse500Json}
+getUserDataItem:
+  handler: com.serverless.handler.GetUserDataItemHandler
+  events:
+    - http:
+        method: get
+        path: users/{userId}/{itemId}
+        documentation:
+          summary: "Get data item"
+          description: "Get single data item for a given user with the all collection items"
+          pathParams:
+            - name: "userId"
+              description: "ID of the user"
+            - name: "itemId"
+              description: "ID of the data item"
+          methodResponses:
+            - statusCode: '200'
+              responseModels:
+                "application/json": UserDataItem
+            - ${self:custom.commonModelSchemaFragments.MethodResponse404Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse500Json}
+addDataItem:
+  handler: com.serverless.handler.AddUserDataHandler
+  events:
+    - http:
+        method: post
+        path: users/{userId}
+        reqValidatorName: requestValidator
+        documentation:
+          summary: "Adds a data item for a user"
+          description: "Adds new data item for the given user"
+          pathParams:
+            - name: "userId"
+              description: "ID of the user"
+          requestModels:
+            "application/json": UserDataItem
+          methodResponses:
+            - statusCode: '200'
+              description: "Returns a UserData with list of all data items"
+              responseModels:
+                "application/json": UserData
+            - ${self:custom.commonModelSchemaFragments.MethodResponse400Json} # Bad request body
+            - ${self:custom.commonModelSchemaFragments.MethodResponse409Json} # Duplicated entry
+            - ${self:custom.commonModelSchemaFragments.MethodResponse415Json} # Missing or wrong content-type
+            - ${self:custom.commonModelSchemaFragments.MethodResponse500Json}
+updateDataItem:
+  handler: com.serverless.handler.UpdateDataItemHandler
+  events:
+    - http:
+        method: put
+        path: users/{userId}/{itemId}
+        reqValidatorName: requestValidator
+        documentation:
+          summary: "Updates data item"
+          description: "Updates data item for a given user"
+          pathParams:
+            - name: "userId"
+              description: "ID of the user"
+            - name: "itemId"
+              description: "ID of the data item"
+          requestModels:
+            "application/json": UserDataItem
+          methodResponses:
+            - statusCode: '200'
+              description: "Returns a userDataItem after adding collection item"
+              responseModels:
+                "application/json": UserDataItem
+            - ${self:custom.commonModelSchemaFragments.MethodResponse400Json} # Bad request body
+            - ${self:custom.commonModelSchemaFragments.MethodResponse409Json} # Duplicated entry
+            - ${self:custom.commonModelSchemaFragments.MethodResponse415Json} # Missing or wrong content-type
+            - ${self:custom.commonModelSchemaFragments.MethodResponse500Json}
+

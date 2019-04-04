@@ -1,0 +1,39 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "title" : "User Data schema",
+  "type" : "object",
+  "additionalProperties" : false,
+  "description" : "Object represeting a single user. It consists array of references (ids) to actual data items together with names",
+  "properties" : {
+    "userId" : {
+      "type" : "string",
+      "minLength" : 1,
+      "description" : "User Identifier"
+    },
+    "dataItems" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/DataItem"
+      },
+      "description" : "Array of user data items"
+    }
+  },
+  "required" : [ "userId", "dataItems" ],
+  "definitions" : {
+    "DataItem" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "userDataItemId" : {
+          "type" : "string",
+          "description" : "Data Item Identifier"
+        },
+        "userDataItemName" : {
+          "type" : "string",
+          "description" : "Data Item human readable name"
+        }
+      },
+      "required" : [ "userDataItemId", "userDataItemName" ]
+    }
+  }
+}

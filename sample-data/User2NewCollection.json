@@ -1,0 +1,19 @@
+{
+  "userId": "2",
+  "itemId": "1",
+  "itemName": "Updated Data Item name",
+  "collection": [
+    {
+      "id": "33",
+      "headline": "Foo bar zx - replaced",
+      "subheadline": "Lorem ipsum xx replaced",
+      "visible": true
+    },
+    {
+      "id": "44",
+      "headline": "Foo bar 2 xx replaced",
+      "subheadline": "Ipsum lorem xx replaced",
+      "visible": false
+    }
+  ]
+}

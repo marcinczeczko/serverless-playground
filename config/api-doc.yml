@@ -1,0 +1,10 @@
+api:
+  info:
+    version: '1.0.0'
+    title: My Api
+    description: This is my API
+  tags:
+    - name: User
+      description: User Management
+models:
+  ${file(config/models/models.json)}

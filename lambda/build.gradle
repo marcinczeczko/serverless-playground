@@ -1,0 +1,64 @@
+apply plugin: com.marcinczeczko.jsonschema.JsonSchemaPlugin
+
+description = "Lambda example"
+
+dependencies {
+    compile(
+            'com.amazonaws:aws-lambda-java-core:1.2.0',
+            'com.amazonaws:aws-lambda-java-log4j:1.0.0',
+            'com.amazonaws:aws-lambda-java-events:2.2.5',
+            'com.amazonaws:aws-java-sdk-dynamodb:1.11.511',
+            'com.fasterxml.jackson.core:jackson-core:2.8.5',
+            'com.fasterxml.jackson.core:jackson-databind:2.8.5',
+            'com.fasterxml.jackson.core:jackson-annotations:2.8.5',
+            'com.google.code.gson:gson:2.8.5',
+            'org.apache.bval:bval-jsr:2.0.0',
+            'javax.validation:validation-api:2.0.1.Final',
+            'org.apache.logging.log4j:log4j-core:2.11.2',
+            'org.apache.commons:commons-lang3:3.8.1'
+
+    )
+    compileOnly 'com.kjetland:mbknor-jackson-jsonschema_2.12:1.0.33'
+
+    testCompile(
+            'com.amazonaws:DynamoDBLocal:1.+',
+            //SQLite4Java, required by local DynamoDB
+            'com.almworks.sqlite4java:sqlite4java:1.0.392',
+            'com.github.stefanbirkner:system-rules:1.19.0'
+    )
+}
+
+// SQLLite4java native libs required to run local dynamoDB
+task copyNativeDeps(type: Copy) {
+    from(configurations.compile + configurations.testCompile) {
+        include "*.dylib"
+        include "*.so"
+        include "*.dll"
+    }
+    into 'build/libs'
+}
+
+// Task for building the zip file for upload
+task buildZip(type: Zip) {
+    archiveFileName = "aws-serverless.zip"
+    destinationDirectory = file("$buildDir/distributions")
+
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtime
+    }
+}
+
+test {
+    systemProperty "dynamodb.port", "8050"
+    systemProperty 'java.library.path', 'build/libs'
+    dependsOn copyNativeDeps
+}
+
+build.dependsOn(buildZip)
+
+jsonSchema {
+    destinationDirectory = file("$rootDir")
+    modelsRelativePath = "config/models"
+}

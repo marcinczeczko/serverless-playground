@@ -1,0 +1,41 @@
+service: users-services
+
+plugins:
+  - serverless-reqvalidator-plugin
+  - serverless-aws-documentation
+
+package:
+  artifact: lambda/build/distributions/aws-serverless.zip
+
+provider:
+  name: aws
+  runtime: java8
+  region: eu-central-1
+  stage: dev
+  tracing:
+    lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+      Resource:
+        - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
+  environment:
+    JAVA_TOOL_OPTIONS: '-Dusers.table.name=${self:custom.usersTableName}'
+
+custom:
+  usersTableName: 'users-${self:provider.stage}'
+  documentation:
+    ${file(config/api-doc.yml)}
+  commonModelSchemaFragments:
+    ${file(config/common-schema.yml)}
+
+functions:
+  ${file(config/functions.yml)}
+
+resources:
+  ${file(config/resources.yml)}

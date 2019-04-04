@@ -1,0 +1,23 @@
+*.class
+.gradle
+build/
+/bin/
+.project
+.classpath
+node_modules/
+
+
+# Package Files
+!gradle-wrapper.jar
+
+# Serverless directories
+.serverless
+
+#idea
+.settings/
+*.iws
+*.ipr
+.idea
+out/
+
+rest-client.env.json

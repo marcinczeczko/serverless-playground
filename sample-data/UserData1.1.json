@@ -1,0 +1,19 @@
+{
+  "userId": "1",
+  "itemId": "2",
+  "itemName": "Sample Data Item 2 - for User 1",
+  "collection": [
+    {
+      "id": "1",
+      "headline": "Foo bar 2",
+      "subheadline": "Lorem ipsum 2",
+      "visible": true
+    },
+    {
+      "id": "2",
+      "headline": "Foo bar 3",
+      "subheadline": "Ipsum lorem 3",
+      "visible": false
+    }
+  ]
+}

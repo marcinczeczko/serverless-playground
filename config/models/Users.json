@@ -1,0 +1,16 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "title" : "Users list",
+  "type" : "object",
+  "additionalProperties" : false,
+  "properties" : {
+    "userIds" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      },
+      "description" : "A set of user Ids available"
+    }
+  },
+  "required" : [ "userIds" ]
+}
